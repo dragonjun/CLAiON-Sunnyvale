@@ -31,4 +31,10 @@ $ kubectl version --short --client
 
 ## 참고자료
 
+- [Git : https://git-scm.com](https://git-scm.com)
+- [GitHub : https://github.com](https://github.com)
+- [AWS CodePipeline : https://aws.amazon.com/ko/codepipeline](https://aws.amazon.com/ko/codepipeline)
+- [AWS CodeBuild : https://aws.amazon.com/ko/codebuild](https://aws.amazon.com/ko/codebuild)
+- [Kubernetes : https://kubernetes.io](https://kubernetes.io)
+- [Helm : https://helm.sh](https://helm.sh)
 - [Installing kubectl : https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
