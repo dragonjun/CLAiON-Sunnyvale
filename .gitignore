@@ -1,0 +1,17 @@
+### OS ###
+*~
+.DS_Store
+Thumbs.db
+
+### Eclipse ###
+.classpath
+.project
+.metadata/
+.settings/
+
+### Maven ###
+target/
+
+### Gradle ###
+.gradle
+build/
