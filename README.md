@@ -28,6 +28,14 @@ echo 'alias k=kubectl' >>~/.zshrc
 echo 'complete -F __start_kubectl k' >>~/.zshrc
 ```
 
+**eksctl 설치**
+
+```bash
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+```
+
 ---
 
 ## 참고자료
@@ -40,3 +48,4 @@ echo 'complete -F __start_kubectl k' >>~/.zshrc
 - [Helm : https://helm.sh](https://helm.sh)
 - [Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - [zsh auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/)
+- [The official CLI for Amazon EKS](https://github.com/weaveworks/eksctl)
