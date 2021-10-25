@@ -20,11 +20,12 @@ GitHub에서 Kubernetes 클러스터로 배포되는 CI/CD 파이프라인을 �
 **kubectl 설치**
 
 ```bash
-$ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
-$ chmod +x ./kubectl
-$ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-$ echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-$ kubectl version --short --client
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --short --client
+echo 'source <(kubectl completion zsh)' >>~/.zshrc
+echo 'alias k=kubectl' >>~/.zshrc
+echo 'complete -F __start_kubectl k' >>~/.zshrc
 ```
 
 ---
@@ -37,4 +38,5 @@ $ kubectl version --short --client
 - [AWS CodeBuild : https://aws.amazon.com/ko/codebuild](https://aws.amazon.com/ko/codebuild)
 - [Kubernetes : https://kubernetes.io](https://kubernetes.io)
 - [Helm : https://helm.sh](https://helm.sh)
-- [Installing kubectl : https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- [Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+- [zsh auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/)
