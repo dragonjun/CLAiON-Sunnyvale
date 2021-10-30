@@ -31,8 +31,8 @@ echo 'complete -F __start_kubectl k' >>~/.zshrc
 **eksctl 설치**
 
 ```bash
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv /tmp/eksctl /usr/local/bin
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C .
+sudo mv eksctl /usr/local/bin
 eksctl version
 ```
 
