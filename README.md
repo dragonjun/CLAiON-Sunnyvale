@@ -1,23 +1,67 @@
 # CLAION Sunnyvale Project
 
-GitHub에서 Kubernetes 클러스터로 배포되는 CI/CD 파이프라인을 구축한다.
-
-다음 스택을 사용
-
-- Git/GitHub
-- AWS CodePipeline
-- AWS CodeBuild
-- Kubernetes
-- Helm
-
 ## 사전 준비
 
 1. WSL 2 설치
-1. AWS CLI 설치
+1. Docker Desktop
 
 ## 설치
 
-**kubectl 설치**
+### 폰트
+
+- [D2 Coding](https://github.com/naver/d2codingfont)
+
+### Visual Studio Code
+
+- [Download](https://code.visualstudio.com/)
+
+### zsh 설치
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install zsh -y
+zsh --version
+
+sudo vi /etc/passwd # /bin/bash -> /bin/zsh
+# shell 다시 실행하고 0 선택
+
+# Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# 플러그인
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+vi ~/.zshrc
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source ~/.zshrc
+```
+
+### AWS CLI
+
+```bash
+sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+
+aws configure
+AWS Access Key ID [None]:
+AWS Secret Access Key [None]:
+Default region name [None]: ap-northeast-2
+Default output format [None]: yaml
+
+aws configure list
+aws sts get-caller-identity
+```
+
+### kubectl
 
 ```bash
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
@@ -26,26 +70,33 @@ kubectl version --short --client
 echo 'source <(kubectl completion zsh)' >>~/.zshrc
 echo 'alias k=kubectl' >>~/.zshrc
 echo 'complete -F __start_kubectl k' >>~/.zshrc
+source ~/.zshrc
+
+aws eks --region ap-northeast-2 update-kubeconfig --name sunnyvale --verbose --alias sunnyvale
+kubectl get svc
 ```
 
-**eksctl 설치**
+## Namespace
 
 ```bash
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C .
-sudo mv eksctl /usr/local/bin
-eksctl version
+kubectl create namespace <insert-namespace-name-here>
+echo 'alias kn="kubectl --namespace=class1109"' >>~/.zshrc
 ```
 
 ---
 
 ## 참고자료
 
-- [Git : https://git-scm.com](https://git-scm.com)
-- [GitHub : https://github.com](https://github.com)
-- [AWS CodePipeline : https://aws.amazon.com/ko/codepipeline](https://aws.amazon.com/ko/codepipeline)
-- [AWS CodeBuild : https://aws.amazon.com/ko/codebuild](https://aws.amazon.com/ko/codebuild)
+- [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- [Installing or updating the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+- [Configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)
+- [Installing kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- [zsh auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/)
 - [Kubernetes : https://kubernetes.io](https://kubernetes.io)
 - [Helm : https://helm.sh](https://helm.sh)
-- [Install and Set Up kubectl on Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
-- [zsh auto-completion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/)
-- [The official CLI for Amazon EKS](https://github.com/weaveworks/eksctl)
+- [Docker Hub](https://hub.docker.com/)
+- [Artifact Hub](https://artifacthub.io/)
+- [Bitnami: Packaged Applications for Any Platform - Cloud, Container, Virtual Machine](https://bitnami.com/)
+- [Connecting Applications with Services](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)
