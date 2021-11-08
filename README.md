@@ -13,7 +13,21 @@
 
 ### Visual Studio Code
 
-- [Download](https://code.visualstudio.com/)
+- [Download](https://code.visualstudio.com/Download)
+
+**Extensions**
+
+- Remote - WSL
+- indent-rainbow
+- Prettier - Code formatter
+
+**설정**
+
+- editor.acceptSuggestionOnEnter
+- editor.fontFamily
+- editor.bracketPairColorization.enabled
+- editor.guides.bracketPairs
+- yaml
 
 ### zsh 설치
 
