@@ -1,15 +1,10 @@
-# CLAION Sunnyvale Project
+# CLAiON Sunnyvale Project
 
-## 사전 준비
+## 개발 환경 설정
 
-1. WSL 2 설치
-1. Docker Desktop
-
-## 설치
-
-### 폰트
-
-- [D2 Coding](https://github.com/naver/d2codingfont)
+1. 개발 폰트 설치 : [D2 Coding](https://github.com/naver/d2codingfont)
+1. [WSL 설치](https://docs.microsoft.com/ko-kr/windows/wsl/install)
+1. [Docker Desktop](https://docs.docker.com/get-docker/) 설치
 
 ### Visual Studio Code
 
@@ -29,34 +24,56 @@
 - editor.guides.bracketPairs
 - yaml
 
-### zsh 설치
+### Zsh & Oh My Zsh 설치
 
 ```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install zsh -y
-zsh --version
+$ sudo apt update && sudo apt upgrade -y
+$ sudo apt install zsh -y
+$ zsh --version
+```
 
-sudo vi /etc/passwd # /bin/bash -> /bin/zsh
-# shell 다시 실행하고 0 선택
+**shell 변경**
 
-# Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```bash
+$ chsh -s $(which zsh)
+```
 
+또는
+
+```bash
+$ sudo vi /etc/passwd # /bin/bash -> /bin/zsh
+```
+
+shell 다시 실행하고 0 선택
+
+```bash
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # 플러그인
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+$ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
 
-vi ~/.zshrc
+에디터로 .zshrc 파일을 열어서
+
+```bash
+$ vi ~/.zshrc
+```
+
+plugins 를 찾아서 다음으로 수정한다.
+
+```bash
 plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
-
-source ~/.zshrc
 ```
 
-### AWS CLI
+```bash
+$ source ~/.zshrc
+```
+
+### AWS CLI 설치
 
 ```bash
 sudo apt install unzip
@@ -75,7 +92,7 @@ aws configure list
 aws sts get-caller-identity
 ```
 
-### kubectl
+### kubectl 설치
 
 ```bash
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
