@@ -47,7 +47,7 @@ $ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.z
 $ unzip awscliv2.zip
 $ sudo ./aws/install
 $ aws --version
-$ echo "\n# AWS CLI Command completion" >>~/.zshrc
+$ echo -e "\n# AWS CLI Command completion" >>~/.zshrc
 $ echo "autoload bashcompinit && bashcompinit" >>~/.zshrc
 $ echo "autoload -Uz compinit && compinit" >>~/.zshrc
 $ echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc
@@ -73,8 +73,8 @@ $ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-0
 $ chmod +x ./kubectl
 $ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
 $ kubectl version --short --client
-$ echo '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc
-$ echo '\n# Kubernetes auto completion' >>~/.zshrc
+$ echo -e '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc
+$ echo -e '\n# Kubernetes auto completion' >>~/.zshrc
 $ echo 'source <(kubectl completion zsh)' >>~/.zshrc
 $ echo 'alias k=kubectl' >>~/.zshrc
 $ echo 'complete -F __start_kubectl k' >>~/.zshrc
