@@ -91,29 +91,44 @@ $ kubectl get svc
 
 ## Quick Setup
 
-### 1 step
+### Step 1
 
 ```bash
-sudo yum update -y && \
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-unzip awscliv2.zip && \
-sudo ./aws/install && \
-aws --version && \
-sudo yum install zsh -y && \
-zsh --version && \
-sudo yum install util-linux-user -y && \
-sudo chsh -s $(which zsh) $(whoami) && \
-touch .zshrc && \
-chmod 644 .zshrc && \
-sudo yum install git -y && \
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+$ mkdir temp && cd temp && \
+  sudo yum update -y && sudo yum install zsh -y && \
+  zsh --version && \
+  sudo yum install util-linux-user -y && \
+  sudo chsh -s $(which zsh) $(whoami) && \
+  sudo yum install git -y && \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+  sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc && \
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+  unzip awscliv2.zip && \
+  sudo ./aws/install && \
+  aws --version && \
+  echo -e "\n# AWS CLI Command completion" >>~/.zshrc && \
+  echo "autoload bashcompinit && bashcompinit" >>~/.zshrc && \
+  echo "autoload -Uz compinit && compinit" >>~/.zshrc && \
+  echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc && \
+  curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl && \
+  chmod +x ./kubectl && \
+  mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin && \
+  kubectl version --short --client && \
+  echo -e '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc && \
+  echo -e '\n# Kubernetes auto completion' >>~/.zshrc && \
+  echo 'source <(kubectl completion zsh)' >>~/.zshrc && \
+  echo 'alias k=kubectl' >>~/.zshrc && \
+  echo 'complete -F __start_kubectl k' >>~/.zshrc && \
+  cd ~
 ```
 
 ```bash
 exit
 ```
 
-### 2 step
+### Step 2
 
 ```bash
 $ aws configure
@@ -123,31 +138,10 @@ Default region name [None]: ap-northeast-2
 Default output format [None]: json
 
 $ aws configure list
-```
 
-### 3 step
-
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
-sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc && \
-curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl && \
-chmod +x ./kubectl && \
-mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin && \
-kubectl version --short --client && \
-echo '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc && \
-echo "\n# AWS CLI Command completion" >>~/.zshrc && \
-echo "autoload bashcompinit && bashcompinit" >>~/.zshrc && \
-echo "autoload -Uz compinit && compinit" >>~/.zshrc && \
-echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc && \
-echo '\n# Kubernetes auto completion' >>~/.zshrc && \
-echo 'source <(kubectl completion zsh)' >>~/.zshrc && \
-echo 'alias k=kubectl' >>~/.zshrc && \
-echo 'complete -F __start_kubectl k' >>~/.zshrc && \
-source ~/.zshrc && \
-aws --no-cli-pager sts get-caller-identity && \
-aws eks update-kubeconfig --region ap-northeast-2 --name sunnyvale --verbose --alias sunnyvale && \
-kubectl get svc
+$ aws --no-cli-pager sts get-caller-identity && \
+  aws eks update-kubeconfig --region ap-northeast-2 --name sunnyvale --verbose --alias sunnyvale && \
+  kubectl get svc
 ```
 
 ---
