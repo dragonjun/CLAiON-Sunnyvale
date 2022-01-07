@@ -123,6 +123,11 @@ $ mkdir temp && cd temp && \
   echo 'source <(kubectl completion zsh)' >>~/.zshrc && \
   echo 'alias k=kubectl' >>~/.zshrc && \
   echo 'complete -F __start_kubectl k' >>~/.zshrc && \
+  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
+  chmod 700 get_helm.sh && \
+  ./get_helm.sh && \
+  echo -e '\n# Helm auto completion' >>~/.zshrc && \
+  echo 'source <(helm completion zsh)' >>~/.zshrc && \
   cd ~
 ```
 
