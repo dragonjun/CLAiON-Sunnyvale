@@ -114,16 +114,6 @@ exit
 
 ### 2 step
 
-.zshrc 파일에서 plugins을 다음으로 수정한다.
-
-```
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
-```
-
 ```bash
 $ aws configure
 AWS Access Key ID [None]:
@@ -139,6 +129,7 @@ $ aws configure list
 ```bash
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc && \
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl && \
 chmod +x ./kubectl && \
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin && \
