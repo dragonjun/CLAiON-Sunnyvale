@@ -135,12 +135,12 @@ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/
 chmod +x ./kubectl && \
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin && \
 kubectl version --short --client && \
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.zshrc && \
-echo "# AWS CLI Command completion" >>~/.zshrc && \
+echo '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc && \
+echo "\n# AWS CLI Command completion" >>~/.zshrc && \
 echo "autoload bashcompinit && bashcompinit" >>~/.zshrc && \
 echo "autoload -Uz compinit && compinit" >>~/.zshrc && \
 echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc && \
-echo '# Kubernetes auto completion' >>~/.zshrc && \
+echo '\n# Kubernetes auto completion' >>~/.zshrc && \
 echo 'source <(kubectl completion zsh)' >>~/.zshrc && \
 echo 'alias k=kubectl' >>~/.zshrc && \
 echo 'complete -F __start_kubectl k' >>~/.zshrc && \
