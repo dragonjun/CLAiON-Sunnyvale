@@ -10,17 +10,17 @@
 
 ```bash
 $ mkdir temp && cd temp && \
-  sudo apt update && sudo apt upgrade -y && \
-  sudo apt install zsh -y && \
+  sudo yum update -y && sudo yum install zsh -y && \
   zsh --version && \
+  sudo yum install util-linux-user -y && \
   sudo chsh -s $(which zsh) $(whoami) && \
+  sudo yum install git -y && \
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
   sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc && \
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k && \
   sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc && \
-  sudo apt install unzip && \
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
   unzip awscliv2.zip && \
   sudo ./aws/install && \
@@ -44,8 +44,6 @@ $ mkdir temp && cd temp && \
   echo -e '\n# Helm auto completion' >>~/.zshrc && \
   echo 'source <(helm completion zsh)' >>~/.zshrc && \
   cd ~
-
-$ exit
 ```
 
 ### Step 2
