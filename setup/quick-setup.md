@@ -132,6 +132,8 @@ $ rm -rf ~/.oh-my-zsh && \
   rm -f ~/.p10k.zsh && \
   rm -rf ~/bin && \
   rm -rf ~/temp && \
+  rm -rf ~/.aws && \
+  rm -rf ~/.kube && \
   sudo rm -rf /usr/local/aws-cli/ && \
   sudo rm -f /usr/local/bin/aws && \
   sudo rm -f /usr/local/bin/helm && \
