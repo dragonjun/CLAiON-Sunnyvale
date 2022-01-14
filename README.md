@@ -9,52 +9,47 @@
 ### Zsh 설치
 
 ```bash
-$ sudo apt update && sudo apt upgrade -y
-$ sudo apt install zsh -y
-$ zsh --version
+sudo apt update && sudo apt upgrade -y
+sudo apt install zsh -y
+zsh --version
 ```
 
 ### shell 변경
 
 ```bash
-$ sudo chsh -s $(which zsh) $(whoami)
-$ touch .zshrc
-$ chmod 644 .zshrc
-$ exit
+sudo chsh -s $(which zsh) $(whoami)
+touch .zshrc
+chmod 644 .zshrc
+exit
 ```
 
 ### Oh My Zsh 설치
 
 ```bash
-$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# 플러그인
-$ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-.zshrc 파일에서 plugins을 다음으로 수정한다.
+.zshrc 파일에서 `plugins=(git)`을 `plugins=(git zsh-autosuggestions zsh-syntax-highlighting)`으로 수정하거나 다음 커맨드 실행
 
-```
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+```bash
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc
 ```
 
 ### AWS CLI 설치
 
 ```bash
-$ sudo apt install unzip
-$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-$ unzip awscliv2.zip
-$ sudo ./aws/install
-$ aws --version
-$ echo "# AWS CLI Command completion" >>~/.zshrc
-$ echo "autoload bashcompinit && bashcompinit" >>~/.zshrc
-$ echo "autoload -Uz compinit && compinit" >>~/.zshrc
-$ echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc
-$ source ~/.zshrc
+sudo apt install unzip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+echo "# AWS CLI Command completion" >>~/.zshrc
+echo "autoload bashcompinit && bashcompinit" >>~/.zshrc
+echo "autoload -Uz compinit && compinit" >>~/.zshrc
+echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc
+source ~/.zshrc
 ```
 
 ### aws 설정
@@ -72,25 +67,25 @@ $ aws configure list
 ### kubectl 설치
 
 ```bash
-$ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
-$ chmod +x ./kubectl
-$ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-$ kubectl version --short --client
-$ echo 'export PATH=$PATH:$HOME/bin' >> ~/.zshrc
-$ echo '# Kubernetes auto completion' >>~/.zshrc
-$ echo 'source <(kubectl completion zsh)' >>~/.zshrc
-$ echo 'alias k=kubectl' >>~/.zshrc
-$ echo 'complete -F __start_kubectl k' >>~/.zshrc
-$ source ~/.zshrc
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+kubectl version --short --client
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.zshrc
+echo '# Kubernetes auto completion' >>~/.zshrc
+echo 'source <(kubectl completion zsh)' >>~/.zshrc
+echo 'alias k=kubectl' >>~/.zshrc
+echo 'complete -F __start_kubectl k' >>~/.zshrc
+source ~/.zshrc
 ```
 
 ### kubeconfig 설정
 
 ```bash
-$ aws sts get-caller-identity
-$ aws eks update-kubeconfig --name sunnyvale --alias handson
-$ kubectl config set contexts.handson.namespace <insert-your-name-here>
-$ kubectl get svc
+aws --no-cli-pager sts get-caller-identity
+aws eks update-kubeconfig --name sunnyvale --alias handson
+kubectl config set contexts.handson.namespace <insert-your-name-here>
+kubectl get svc
 ```
 
 ---
