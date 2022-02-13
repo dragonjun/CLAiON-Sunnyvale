@@ -1,4 +1,4 @@
-# Setup Kubernetes Hands-on Environment on Amazon Linux 2
+# Setup Kubernetes Hands-on Environment on Ubuntu
 
 ## Step by Step
 
