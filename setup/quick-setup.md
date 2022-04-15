@@ -75,11 +75,19 @@ $ mkdir temp && cd temp && \
   unzip awscliv2.zip && \
   sudo ./aws/install && \
   aws --version && \
+  echo -e "\n# AWS CLI Command completion" >>~/.zshrc && \
+  echo "autoload bashcompinit && bashcompinit" >>~/.zshrc && \
+  echo "autoload -Uz compinit && compinit" >>~/.zshrc && \
+  echo "complete -C '/usr/local/bin/aws_completer' aws" >>~/.zshrc && \
   curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl && \
   chmod +x ./kubectl && \
   mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin && \
   kubectl version --short --client && \
   echo -e '\nexport PATH=$PATH:$HOME/bin' >> ~/.zshrc && \
+  echo -e '\n# Kubernetes auto completion' >>~/.zshrc && \
+  echo 'source <(kubectl completion zsh)' >>~/.zshrc && \
+  echo 'alias k=kubectl' >>~/.zshrc && \
+  echo 'complete -F __start_kubectl k' >>~/.zshrc && \
   curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
   chmod 700 get_helm.sh && \
   ./get_helm.sh && \
